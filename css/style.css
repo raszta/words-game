@@ -1,0 +1,13 @@
+body{
+    position: relative;
+}
+
+.gameInput{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+}
+
+.invisible{
+    display:none;
+}
