@@ -4,6 +4,10 @@
     padding: 0;
 }
 
+body{
+    position: relative;
+}
+
 .game {
     display: flex;
     justify-content: space-between;
@@ -12,9 +16,9 @@
 }
 
 .game-letter{
-    width:3rem;
+    width:4rem;
     font-weight: 900;
-    font-size: 1rem;
+    font-size: 2rem;
     padding: 1rem;
     margin:0.8rem;
     background: linear-gradient(rgba(125, 218, 20, 0.7), rgba(3, 219, 86, 0.7));
@@ -30,4 +34,60 @@
     color: black;  
     background: linear-gradient(rgba(141, 148, 133, 0.7), rgba(49, 59, 53, 0.7));
     box-shadow: 2px 2px 3px black;
+}
+
+.game-start__btn{
+    height: 6rem;
+    width: 12rem;
+    padding: 1rem;
+    font-size: 4rem;
+    position: absolute;
+    top:90vh;
+}
+
+.prepare{    
+    position:absolute;
+    z-index: 2;
+    background: url(../img/evening.png) center/cover no-repeat;
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.prepare-text{
+   text-align: center;
+    font-size: 5rem;
+}
+
+.game-attempts{
+    margin:2rem;
+    border: 0.1rem solid black;
+    border-radius: 0.5rem;
+    font-size: 2rem;
+    padding: 1rem;
+}
+
+.game-letter-box{
+    border:0.1rem solid black;
+    height: 6rem;
+    width: 6rem;
+    margin: 0.5rem;
+}
+
+.game-letter-box--without{
+    border:0;
+}
+
+.game-sentence{
+    margin:3rem;
+    display: flex;
+}
+
+.game-letters{
+    margin: 3rem;
+    width:70vw;
+    display:flex;
+    flex-wrap: wrap;
 }
