@@ -4,15 +4,28 @@
     padding: 0;
 }
 
-
+.game {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+}
 
 .game-letter{
+    width:3rem;
     font-weight: 900;
     font-size: 1rem;
     padding: 1rem;
-    margin:0.5rem;
+    margin:0.8rem;
     background: linear-gradient(rgba(125, 218, 20, 0.7), rgba(3, 219, 86, 0.7));
 }
+
+.game-letter:not(:disabled):hover{
+    color:white;
+    background: rgb(45, 224, 9);
+    box-shadow: 2px 2px 3px black;
+}
+
 .game-letter:disabled{  
     color: black;  
     background: linear-gradient(rgba(141, 148, 133, 0.7), rgba(49, 59, 53, 0.7));
