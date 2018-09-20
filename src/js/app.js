@@ -29,13 +29,13 @@ $(()=>{
 
             const checkLettersInPassword =  (param) =>{
                 let pass = currentPass.toUpperCase();
-                if (pass.toUpperCase().indexOf(param.dataset.id) !== -1){
+                if (pass.toUpperCase().indexOf(param) !== -1){
                     for (let i = 0; i < pass.length; i++) {
-                        if (pass[i] === param.dataset.id) {
-                            let passbox = document.querySelectorAll('.game-letter-box')[i]; passbox.innerText = param.dataset.id; 
+                        if (pass[i] === param) {
+                            let passbox = document.querySelectorAll('.game-letter-box')[i]; passbox.innerText = param; 
                         }
                     }
-                    currentPassLetters = currentPassLetters.replace(new RegExp(param.dataset.id, 'g'), '');
+                    currentPassLetters = currentPassLetters.replace(new RegExp(param, 'g'), '');
 
                     if (!isLetterExists()) {
                         this.disableLetters();
@@ -52,11 +52,20 @@ $(()=>{
  
             this.bindClick = () =>{
                 $elemLetters.on('click', '.game-letter', function( e ){
-                   checkLettersInPassword(this);
+                   checkLettersInPassword(this.dataset.id);
                    $( e.target ).attr( 'disabled', true );                  
                 });
+                document.addEventListener('keydown', function (e) {
+                    checkLettersInPassword(e.key.toUpperCase());
+                    const elem = document.querySelectorAll('.game-letter');
+                    
+                    elem.forEach(el=>{
+                        if (el.dataset.id === e.key.toUpperCase())
+                            el.disabled = true;
+                    })
+                });
             }
-
+            
             this.initBoard =  () =>{
                 this.generateLetters();
                 this.bindClick();
@@ -138,5 +147,4 @@ $(()=>{
         game.startGame();
         $startBtn.attr( 'disabled', true);           
     });
-
 });
