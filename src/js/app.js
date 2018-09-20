@@ -53,9 +53,9 @@ $(()=>{
             }
 
             this.randomSentence = ()=>{
+
                 this.currentPass = passwords[Math.floor(Math.random()*passwords.length)];
                 this.currentPassLetters = this.currentPass.replace(/ /g, '');
-                console.log(this.currentPass);
                 
                 $gameSentence.innerHtml = '';
                 const letters = this.currentPass.split('');
@@ -74,7 +74,7 @@ $(()=>{
                 this.initBoard();
                 this.attempts = 4;
                 
-                $prepare.show();      
+                $prepare.fadeIn('slow');      
                 setTimeout(()=>{
                     $prepare.hide();          
                     this.enableLetters();

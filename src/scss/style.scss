@@ -6,6 +6,7 @@
 
 body{
     position: relative;
+    background: linear-gradient(to right, rgba(218, 210, 210, 0.781), rgba(166, 196, 166, 0.822));
 }
 
 .game {
@@ -22,12 +23,14 @@ body{
     padding: 1rem;
     margin:0.8rem;
     background: linear-gradient(rgba(125, 218, 20, 0.7), rgba(3, 219, 86, 0.7));
+    transition: all 0.5s ease;
+    box-shadow: 2px 2px 3px black;
 }
 
 .game-letter:not(:disabled):hover{
     color:white;
     background: rgb(45, 224, 9);
-    box-shadow: 2px 2px 3px black;
+    box-shadow: 4px 4px 5px black;
 }
 
 .game-letter:disabled{  
@@ -42,7 +45,8 @@ body{
     padding: 1rem;
     font-size: 4rem;
     position: absolute;
-    top:90vh;
+    top:85vh;
+    box-shadow: 5px 5px 10px black;
 }
 
 .prepare{    
@@ -67,6 +71,7 @@ body{
     border-radius: 0.5rem;
     font-size: 2rem;
     padding: 1rem;
+    box-shadow: 2px 2px 3px black;
 }
 
 .game-letter-box{
@@ -74,10 +79,12 @@ body{
     height: 6rem;
     width: 6rem;
     margin: 0.5rem;
+    box-shadow: 2px 2px 3px black;
 }
 
 .game-letter-box--without{
     border:0;
+     box-shadow:0 0 0 white;
 }
 
 .game-sentence{
