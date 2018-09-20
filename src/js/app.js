@@ -11,41 +11,51 @@ $(()=>{
             const passwords = [ 'Terminator',
             'Forrest gump', 'Pitch black',
             'Drużyna A' ];
-            this.currentPass = null;
-            this.currentPassLetters = null;
+            let currentPass = null;
+            let currentPassLetters = null;
 
             this.generateLetters =function () {
                 const alphabet = [ 'a', 'ą', 'b', 'c', 'ć', 'd', 'e', 'ę', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'ł', 'm', 'n', 'ń', 'o', 'ó', 'p', 'q', 'r', 's', 'ś', 't', 'u', 'v',  'x', 'y', 'z', 'ż', 'ź' ];
 
                 alphabet.forEach(( letter )=>{
-                    const $btn = $(`<button data-id=${letter}>${letter}</button>`);
+                    const $btn = $(`<button data-id=${letter.toUpperCase()}>${letter.toUpperCase()}</button>`);
                     $btn.addClass('game-letter');
                     $elemLetters.append( $btn );                                       
                 });
-            },
+            }
+
+            const checkLettersInPassword =  (param) =>{
+                let pass = currentPass.toUpperCase();
+                if (pass.toUpperCase().indexOf(param.dataset.id) !== -1){
+                    for (let i = 0; i < pass.length; i++) {
+                        if (pass[i] === param.dataset.id) {
+                            let cos = document.querySelectorAll('.game-letter-box')[i].innerText = param.dataset.id; 
+                        }
+                    }
+                }
+            }
 
             this.bindClick = () =>{
-               $elemLetters.on( 'click', function( e ){
-                   const letter = $(e.target).data('id');
+                $elemLetters.on('click', '.game-letter', function( e ){
+                   checkLettersInPassword(this);
                    $( e.target ).attr( 'disabled', true );                  
-                    
                 });
             }
 
             this.initBoard =  () =>{
                 this.generateLetters();
                 this.bindClick();
-                this.disableLetters();               
+                this.disableLetters(); 
             }
 
             this.enableLetters = () =>{
-                const letters = document.querySelectorAll( '.game-letter');
-                letters.forEach(el => $(el).attr( 'disabled', false));
+                const lettersOnBoard = document.querySelectorAll( '.game-letter');
+                lettersOnBoard.forEach(el => $(el).attr( 'disabled', false));
             }
 
             this.disableLetters = () =>{
-                const letters = document.querySelectorAll( '.game-letter');
-                letters.forEach(el => $(el).attr( 'disabled', true));
+                const lettersOnBoard = document.querySelectorAll( '.game-letter');
+                lettersOnBoard.forEach(el => $(el).attr( 'disabled', true));
             }
 
             this.showAttempts = () =>{
@@ -53,12 +63,12 @@ $(()=>{
             }
 
             this.randomSentence = ()=>{
-
-                this.currentPass = passwords[Math.floor(Math.random()*passwords.length)];
-                this.currentPassLetters = this.currentPass.replace(/ /g, '');
+                currentPass = passwords[Math.floor(Math.random()*passwords.length)];
+                currentPassLetters = currentPass.replace(/ /g, '').toUpperCase();
+                console.log(currentPassLetters, 'obecne litery hasla');
                 
                 $gameSentence.innerHtml = '';
-                const letters = this.currentPass.split('');
+                const letters = currentPass.split('');
 
                 letters.forEach(el =>{
                     const $div = $('<div>');
