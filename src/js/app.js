@@ -1,5 +1,7 @@
 $(()=>{
-   
+    const $gameAttempts = $('.game-attempts');
+    const $gameSentence = $('.game-sentence');
+    const $elemLetters = $('.game-letters');
     const $startBtn = $( '.btn-start' );
     const $prepare = $('.prepare');
 
@@ -7,13 +9,9 @@ $(()=>{
         constructor(){ 
             this.attempts = 0;
             const passwords = [ 'Terminator',
-            'Forrest gump', 'Pitch black', 'Mały książe', 'Czerwona planeta',
-            'Drużyna A' ];
+            'Forrest gump', 'Pitch black', 'Mały książe', 'Czerwona planeta', 'Czarodziejki', 'Władca pierścieni', 'Mały', 'Świat to za mało', 'Drużyna A' ];
             let currentPass = null;
             let currentPassLetters = null;
-            const $gameAttempts = $('.game-attempts');
-            const $gameSentence = $('.game-sentence');
-            const $elemLetters = $('.game-letters');
 
             this.generateLetters =function () {
                 const alphabet = [ 'a', 'ą', 'b', 'c', 'ć', 'd', 'e', 'ę', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'ł', 'm', 'n', 'ń', 'o', 'ó', 'p', 'q', 'r', 's', 'ś', 't', 'u', 'w', 'v',  'x', 'y', 'z', 'ż', 'ź' ];
@@ -97,7 +95,7 @@ $(()=>{
             }
 
             this.startGame = () =>{
-                $prepare.slideDown('vary fast');      
+                infoScreen('Prepare! Game will start in 2 seconds!!')      
                 this.attempts = 4;
                 
                 setTimeout(()=>{
@@ -108,22 +106,35 @@ $(()=>{
                 this.randomSentence();
             }
 
+            const infoScreen = ( param ) =>{
+                $prepare.fadeIn();
+                $prepare.find('.prepare-text').text( param );
+                setTimeout(() =>{
+                    $prepare.hide();
+                },2000);
+            }
+
             this.gameComplete = () =>{
                 this.disableLetters();  
-                $startBtn.attr('disabled', false);                                        
+                infoScreen( 'Congratulations!! You won!!' );
+                $startBtn.attr('disabled', false);
+                $startBtn.text( 'New Game' );                                      
             }
 
             this.gameOver = () =>{
-                this.disableLetters();  
-                $startBtn.attr('disabled', false);                                    
+                this.disableLetters(); 
+                infoScreen('What a pity!! You fail!!'); 
+                $startBtn.attr('disabled', false);
+                $startBtn.text('New Game');                                         
             }
         }
     }
+
     $prepare.hide();  
     let game = new Game();
     game.initBoard();
+
     $startBtn.on( 'click', () =>{        
-        
         game.startGame();
         $startBtn.attr( 'disabled', true);           
     });

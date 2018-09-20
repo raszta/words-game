@@ -40,8 +40,8 @@ body{
 }
 
 .game-start__btn{
-    height: 6rem;
-    width: 12rem;
+    height: 10rem;
+    width: 15rem;
     padding: 1rem;
     font-size: 3rem;
     position: absolute;
@@ -89,7 +89,8 @@ body{
 .game-letter-box--without{
     background:transparent;
     border:0;
-     box-shadow:0 0 0 white;
+    box-shadow:0 0 0 white;
+    margin: 0;
 }
 
 .game-sentence{
