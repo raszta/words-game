@@ -1,8 +1,6 @@
 $(()=>{
-    const $gameAttempts = $( '.game-attempts' );
-    const $gameSentence = $( '.game-sentence' );
-    const $elemLetters = $( '.game-letters' );
-    const $startBtn = $( '.game-start__btn' );
+   
+    const $startBtn = $( '.btn-start' );
     const $prepare = $('.prepare');
 
     class Game {
@@ -13,6 +11,9 @@ $(()=>{
             'Drużyna A' ];
             let currentPass = null;
             let currentPassLetters = null;
+            const $gameAttempts = $('.game-attempts');
+            const $gameSentence = $('.game-sentence');
+            const $elemLetters = $('.game-letters');
 
             this.generateLetters =function () {
                 const alphabet = [ 'a', 'ą', 'b', 'c', 'ć', 'd', 'e', 'ę', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'ł', 'm', 'n', 'ń', 'o', 'ó', 'p', 'q', 'r', 's', 'ś', 't', 'u', 'w', 'v',  'x', 'y', 'z', 'ż', 'ź' ];
@@ -40,21 +41,17 @@ $(()=>{
 
                     if (!isLetterExists()) {
                         this.disableLetters();
-                        
-                        // this.gameComplete();
+                        this.gameComplete();
                     }
-                    
                 }else{
                     this.attempts--;
                     this.showAttempts();
                     if(this.attempts<=0){
-                        console.log('przegrales');
-                        this.disableLetters();
-                        
+                        this.gameOver();
                     }
                 }
             }
-
+ 
             this.bindClick = () =>{
                 $elemLetters.on('click', '.game-letter', function( e ){
                    checkLettersInPassword(this);
@@ -86,7 +83,7 @@ $(()=>{
                 currentPass = passwords[Math.floor(Math.random()*passwords.length)];
                 currentPassLetters = currentPass.replace(/ /g, '').toUpperCase();
                 
-                $gameSentence.innerHtml = '';
+                $gameSentence.html(' ');
                 const letters = currentPass.split('');
 
                 letters.forEach(el =>{
@@ -101,7 +98,6 @@ $(()=>{
 
             this.startGame = () =>{
                 $prepare.slideDown('vary fast');      
-                this.initBoard();
                 this.attempts = 4;
                 
                 setTimeout(()=>{
@@ -111,14 +107,25 @@ $(()=>{
                 this.showAttempts();
                 this.randomSentence();
             }
+
+            this.gameComplete = () =>{
+                this.disableLetters();  
+                $startBtn.attr('disabled', false);                                        
+            }
+
+            this.gameOver = () =>{
+                this.disableLetters();  
+                $startBtn.attr('disabled', false);                                    
+            }
         }
     }
     $prepare.hide();  
-
-    $startBtn.on( 'click', () =>{
-        const game = new Game();
+    let game = new Game();
+    game.initBoard();
+    $startBtn.on( 'click', () =>{        
+        
         game.startGame();
-        $startBtn.attr( 'disabled', true);        
+        $startBtn.attr( 'disabled', true);           
     });
 
 });
