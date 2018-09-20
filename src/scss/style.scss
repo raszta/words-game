@@ -74,7 +74,7 @@ body{
     box-shadow: 2px 2px 3px black;
 }
 
-.game-letter-box{
+.game-letter-box{    
     text-align: center;
     color: red;
     font-size: 4.5rem;
@@ -87,6 +87,7 @@ body{
 }
 
 .game-letter-box--without{
+    background:transparent;
     border:0;
      box-shadow:0 0 0 white;
 }
@@ -98,7 +99,7 @@ body{
 
 .game-letters{
     margin: 3rem;
-    width:70vw;
+    width:60%;
     display:flex;
     flex-wrap: wrap;
 }

@@ -9,13 +9,13 @@ $(()=>{
         constructor(){ 
             this.attempts = 0;
             const passwords = [ 'Terminator',
-            'Forrest gump', 'Pitch black',
+            'Forrest gump', 'Pitch black', 'Mały książe', 'Czerwona planeta',
             'Drużyna A' ];
             let currentPass = null;
             let currentPassLetters = null;
 
             this.generateLetters =function () {
-                const alphabet = [ 'a', 'ą', 'b', 'c', 'ć', 'd', 'e', 'ę', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'ł', 'm', 'n', 'ń', 'o', 'ó', 'p', 'q', 'r', 's', 'ś', 't', 'u', 'v',  'x', 'y', 'z', 'ż', 'ź' ];
+                const alphabet = [ 'a', 'ą', 'b', 'c', 'ć', 'd', 'e', 'ę', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'ł', 'm', 'n', 'ń', 'o', 'ó', 'p', 'q', 'r', 's', 'ś', 't', 'u', 'w', 'v',  'x', 'y', 'z', 'ż', 'ź' ];
 
                 alphabet.forEach(( letter )=>{
                     const $btn = $(`<button data-id=${letter.toUpperCase()}>${letter.toUpperCase()}</button>`);
@@ -24,13 +24,33 @@ $(()=>{
                 });
             }
 
+            const isLetterExists = () =>{
+                return currentPassLetters.length;
+            }
+
             const checkLettersInPassword =  (param) =>{
                 let pass = currentPass.toUpperCase();
                 if (pass.toUpperCase().indexOf(param.dataset.id) !== -1){
                     for (let i = 0; i < pass.length; i++) {
                         if (pass[i] === param.dataset.id) {
-                            let cos = document.querySelectorAll('.game-letter-box')[i].innerText = param.dataset.id; 
+                            let passbox = document.querySelectorAll('.game-letter-box')[i]; passbox.innerText = param.dataset.id; 
                         }
+                    }
+                    currentPassLetters = currentPassLetters.replace(new RegExp(param.dataset.id, 'g'), '');
+
+                    if (!isLetterExists()) {
+                        this.disableLetters();
+                        
+                        // this.gameComplete();
+                    }
+                    
+                }else{
+                    this.attempts--;
+                    this.showAttempts();
+                    if(this.attempts<=0){
+                        console.log('przegrales');
+                        this.disableLetters();
+                        
                     }
                 }
             }
@@ -65,7 +85,6 @@ $(()=>{
             this.randomSentence = ()=>{
                 currentPass = passwords[Math.floor(Math.random()*passwords.length)];
                 currentPassLetters = currentPass.replace(/ /g, '').toUpperCase();
-                console.log(currentPassLetters, 'obecne litery hasla');
                 
                 $gameSentence.innerHtml = '';
                 const letters = currentPass.split('');
@@ -81,12 +100,12 @@ $(()=>{
             }
 
             this.startGame = () =>{
+                $prepare.slideDown('vary fast');      
                 this.initBoard();
                 this.attempts = 4;
                 
-                $prepare.fadeIn('slow');      
                 setTimeout(()=>{
-                    $prepare.hide();          
+                    $prepare.slideUp();          
                     this.enableLetters();
                 },2000);
                 this.showAttempts();
