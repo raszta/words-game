@@ -6,7 +6,7 @@
 
 body{
     position: relative;
-    background: linear-gradient(to right, rgba(218, 210, 210, 0.781), rgba(166, 196, 166, 0.822));
+    background: linear-gradient(to right, rgba(218, 210, 210, 0.781), rgba(199, 211, 199, 0.822)), url(../img/body.jpeg);
 }
 
 .game {
@@ -65,13 +65,17 @@ body{
     font-size: 5rem;
 }
 
-.game-attempts{
+.game-attempts, .game-time{
     margin:2rem;
     border: 0.1rem solid black;
     border-radius: 0.5rem;
     font-size: 2rem;
     padding: 1rem;
-    box-shadow: 2px 2px 3px black;
+    box-shadow: 2px 2px 3px black;    
+}
+
+.game-container{
+    display:flex;
 }
 
 .game-letter-box{    

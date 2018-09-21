@@ -4,6 +4,7 @@ $(()=>{
     const $elemLetters = $('.game-letters');
     const $startBtn = $( '.btn-start' );
     const $prepare = $('.prepare');
+    const $timeCount = $('.game-time');
 
     class Game {
         constructor(){ 
@@ -12,6 +13,7 @@ $(()=>{
             'Forrest gump', 'Pitch black', 'Little prince', 'Red fraction', 'Enchanted', 'Lord of the rings', 'The little', 'The world is not enough', 'Team A', 'Zombieland', 'The last samurai', 'Mission impossible', 'John Carter' ];
             let currentPass = null;
             let currentPassLetters = null;
+            let seconds = null;
 
             this.generateLetters =function () {
                 const alphabet = [ 'a', 'b', 'c',  'd', 'e',  'f', 'g', 'h', 'i', 'j', 'k', 'l',  'm', 'n',  'o',  'p', 'q', 'r', 's', 't', 'u', 'w', 'v',  'x', 'y', 'z' ];
@@ -21,6 +23,19 @@ $(()=>{
                     $btn.addClass('game-letter');
                     $elemLetters.append( $btn );                                       
                 });
+            }
+
+            const time = () =>{
+                this.idGame = setInterval( () => {
+                    seconds--;
+                    $timeCount.text(`Time left: ${seconds} seconds`);
+                    if (seconds <=0){
+                        this.gameOver();
+                        clearInterval(this.idGame);
+                    }
+                   
+                    
+                },1000);
             }
 
             const isLetterExists = () =>{
@@ -106,6 +121,7 @@ $(()=>{
             this.startGame = () =>{
                 infoScreen('Prepare! Game will start in 2 seconds!!')      
                 this.attempts = 4;
+                seconds = 122;
                 
                 setTimeout(()=>{
                     $prepare.slideUp();          
@@ -113,6 +129,7 @@ $(()=>{
                 },2000);
                 this.showAttempts();
                 this.randomSentence();
+                time();
             }
 
             const infoScreen = (param, bck = '../img/evening.png' ) =>{
