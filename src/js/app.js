@@ -8,13 +8,13 @@ $(()=>{
     class Game {
         constructor(){ 
             this.attempts = 0;
-            const passwords = [ 'Terminator',
-            'Forrest gump', 'Pitch black', 'Mały książe', 'Czerwona planeta', 'Czarodziejki', 'Władca pierścieni', 'Mały', 'Świat to za mało', 'Drużyna A' ];
+            const passwords = [ 'Terminator', 'Alice in wonderland', 'Resident evil', 'Her',
+            'Forrest gump', 'Pitch black', 'Little prince', 'Red fraction', 'Enchanted', 'Lord of the rings', 'The little', 'The world is not enough', 'Team A', 'Zombieland', 'The last samurai', 'Mission impossible', 'John Carter' ];
             let currentPass = null;
             let currentPassLetters = null;
 
             this.generateLetters =function () {
-                const alphabet = [ 'a', 'ą', 'b', 'c', 'ć', 'd', 'e', 'ę', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'ł', 'm', 'n', 'ń', 'o', 'ó', 'p', 'q', 'r', 's', 'ś', 't', 'u', 'w', 'v',  'x', 'y', 'z', 'ż', 'ź' ];
+                const alphabet = [ 'a', 'b', 'c',  'd', 'e',  'f', 'g', 'h', 'i', 'j', 'k', 'l',  'm', 'n',  'o',  'p', 'q', 'r', 's', 't', 'u', 'w', 'v',  'x', 'y', 'z' ];
 
                 alphabet.forEach(( letter )=>{
                     const $btn = $(`<button data-id=${letter.toUpperCase()}>${letter.toUpperCase()}</button>`);
@@ -115,9 +115,10 @@ $(()=>{
                 this.randomSentence();
             }
 
-            const infoScreen = ( param ) =>{
+            const infoScreen = (param, bck = '../img/evening.png' ) =>{
                 $prepare.fadeIn();
-                $prepare.find('.prepare-text').text( param );
+                $prepare.find('.prepare-text').text( param ).css('color', 'yellow').css('border', '10px solid yellow');
+                $prepare.css('background', `url(${bck}) center/cover no-repeat` );
                 setTimeout(() =>{
                     $prepare.hide();
                 },2000);
@@ -125,14 +126,14 @@ $(()=>{
 
             this.gameComplete = () =>{
                 this.disableLetters();  
-                infoScreen( 'Congratulations!! You won!!' );
+                infoScreen('Congratulations!! You won!!', '../img/smile.jpeg');
                 $startBtn.attr('disabled', false);
                 $startBtn.text( 'New Game' );                                      
             }
 
             this.gameOver = () =>{
                 this.disableLetters(); 
-                infoScreen('What a pity!! You fail!!'); 
+                infoScreen(`What a pity!! You fail!! \n The password was : ${currentPass}`); 
                 $startBtn.attr('disabled', false);
                 $startBtn.text('New Game');                                         
             }

@@ -52,7 +52,7 @@ body{
 .prepare{    
     position:absolute;
     z-index: 2;
-    background: url(../img/evening.png) center/cover no-repeat;
+    background:  center/cover no-repeat;
     height: 100vh;
     width: 100%;
     display: flex;
@@ -77,11 +77,11 @@ body{
 .game-letter-box{    
     text-align: center;
     color: red;
-    font-size: 4.5rem;
-    padding: 1.3rem;
+    font-size: 4rem;
+    padding: 0.6rem;
     border:0.1rem solid black;
-    height: 6rem;
-    width: 6rem;
+    height: 5rem;
+    width: 5rem;
     margin: 0.5rem;
     box-shadow: 2px 2px 3px black;
 }
@@ -91,11 +91,14 @@ body{
     border:0;
     box-shadow:0 0 0 white;
     margin: 0;
+    width: 3rem;
 }
 
 .game-sentence{
     margin:3rem;
     display: flex;
+    flex-wrap: wrap;
+    text-align: center;
 }
 
 .game-letters{
