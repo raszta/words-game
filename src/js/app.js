@@ -137,7 +137,7 @@ $(()=>{
                 time();
             }
 
-            const infoScreen = ( param, bck = '../img/evening.png' ) =>{
+            const infoScreen = ( param, bck = 'img/evening.png' ) =>{
                 $prepare.fadeIn();
                 $prepare.find( '.prepare-text')
                 .text( param )
@@ -152,7 +152,7 @@ $(()=>{
             this.gameComplete = () =>{
                 win=true;
                 this.disableLetters();  
-                infoScreen( 'Congratulations!! You won!!', '../img/smile.jpeg' );
+                infoScreen( 'Congratulations!! You won!!', 'img/smile.jpeg' );
                 $startBtn.attr( 'disabled', false );
                 $startBtn.text( 'New Game' );                                      
             }
